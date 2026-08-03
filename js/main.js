@@ -2,6 +2,25 @@
 (function () {
   'use strict';
 
+  /* ---- Dark mode ---- */
+  var root = document.documentElement;
+  var stored = null;
+  try { stored = localStorage.getItem('theme'); } catch (e) {}
+  var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  function applyTheme(theme) {
+    if (theme === 'dark') root.setAttribute('data-theme', 'dark');
+    else root.removeAttribute('data-theme');
+  }
+  applyTheme(stored || (systemDark ? 'dark' : 'light'));
+  var themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  }
+
   /* Header: add .scrolled past 40px */
   var header = document.getElementById('siteHeader');
   function onScroll() {
@@ -48,4 +67,23 @@
   /* footer year */
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
+
+  /* contact form → compose an email */
+  var cf = document.getElementById('contactForm');
+  if (cf) {
+    cf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = (document.getElementById('cfName').value || '').trim();
+      var email = (document.getElementById('cfEmail').value || '').trim();
+      var msg = (document.getElementById('cfMessage').value || '').trim();
+      if (!name || !email || !msg) {
+        alert('Please fill in your name, email and message first.');
+        return;
+      }
+      var subject = 'New message from ' + name + ' (via isakzvegelj.github.io)';
+      var body = 'Hi Isak,\n\n' + msg + '\n\n— ' + name + '\n' + email + '\n';
+      var href = 'mailto:isakzv@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      window.location.href = href;
+    });
+  }
 })();
