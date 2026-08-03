@@ -82,7 +82,7 @@
       }
       var subject = 'New message from ' + name + ' (via isakzvegelj.github.io)';
       var body = 'Hi Isak,\n\n' + msg + '\n\n— ' + name + '\n' + email + '\n';
-      var href = 'mailto:isakzv@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      var href = 'mailto:inquire@isakzvegelj.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       window.location.href = href;
     });
   }
