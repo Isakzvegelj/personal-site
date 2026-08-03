@@ -1,32 +1,57 @@
 # How to make a blog post — isakzvegelj.com/blog
 
+The absolute easiest way: use the **publish tool**. You type a title and
+your article into a simple page, click **Publish**, and it goes live —
+no HTML, no git, no terminal needed.
+
+---
+
+## The one-click way (recommended)
+
+1. Open a terminal and run:
+
+       bash /Users/isakzvegelj/projects/personal-site/blog/start.sh
+
+   (It opens the "New blog post" page in your browser automatically.
+   Bookmark http://localhost:8123/ too — the tool must be running to
+   publish, so keep this tab open when you want to post.)
+
+2. Fill in:
+   - **Title** — the headline.
+   - **Date** — defaults to today.
+   - **Tag** — optional small label (Update, Racing, Building…).
+   - **Status** — *Publish live* (recommended) or *Save draft only*.
+   - **Article** — type or paste plain text. No HTML needed.
+
+3. Click **Publish**. It writes the post, commits, pushes to GitHub,
+   and within about a minute it's live at isakzvegelj.com/blog.
+
+You can even hand me a pure-text draft and I'll drop it in for you.
+But with this tool you never have to ask.
+
+### Handy markdown you can use in the article box (all optional)
+
+| you type           | you get           |
+|--------------------|-------------------|
+| `## Heading`       | a section heading |
+| `**bold**`         | bold text         |
+| `*italic*`         | italic text       |
+| `- bullet`         | a bulleted list   |
+| blank line         | a new paragraph   |
+| `![alt](url)`      | an image          |
+| `[text](url)`      | a link            |
+
+Plain text with blank lines between paragraphs works fine too — you
+don't have to learn any of this.
+
+---
+
+## Older way — edit posts.js by hand
+
 Your blog lives at `/Users/isakzvegelj/projects/personal-site/blog/`.
 The whole thing is static and driven by one data file, `blog/posts.js`.
 To publish a post you add one entry to that file, then commit + push.
 GitHub Pages deploys automatically from the `main` branch.
-
-There are two ways to do it. The easy one is recommended.
-
----
-
-## Option A — Just ask me (easiest, recommended)
-
-You don't need to touch anything. Just say something like:
-
-    write a blog post about [topic], publish it on my site
-
-and Hermes will:
-
-1. Add a new entry to `blog/posts.js` (title, date, tag, excerpt, content).
-2. Commit + push to `main`.
-3. Tell you when it's live (usually within a minute).
-
-You can even just dictate rough points and I'll flesh it out.
-Give it a title or a topic and a rough date, and that's enough.
-
----
-
-## Option B — Add it yourself (walk-through)
 
 If you want to do it by hand, here's exactly what to do.
 
