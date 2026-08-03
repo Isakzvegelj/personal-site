@@ -42,6 +42,14 @@
 [data-theme="dark"] .proj-link,
 [data-theme="dark"] .work-cta{color:var(--green);}
 [data-theme="dark"] .result-tag{color:var(--green);border-color:var(--green);}
+/* keep text-on-dark-background light in dark mode (--white flips dark, so pin it) */
+[data-theme="dark"] .hero{color:#f2eee3;}
+[data-theme="dark"] .btn-ghost{color:#f2eee3;}
+[data-theme="dark"] .creator{color:#e9e8df;}
+[data-theme="dark"] .creator-story strong{color:#f2eee3;}
+[data-theme="dark"] .footer .logo{color:#f2eee3;}
+[data-theme="dark"] .contact-form input,
+[data-theme="dark"] .contact-form textarea{color:#f2eee3;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
