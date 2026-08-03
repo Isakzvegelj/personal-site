@@ -214,6 +214,14 @@ a{color:inherit;text-decoration:none;}
 .work-card p{color:var(--muted);font-weight:300;font-size:1rem;flex:1;}
 .work-cta{display:inline-block;margin-top:26px;font-weight:600;font-size:.9rem;color:var(--green);border-bottom:2px solid var(--gold);padding-bottom:3px;width:fit-content;transition:color .25s;}
 .work-cta:hover{color:var(--gold);}
+.work-btn{
+  display:inline-block;margin-top:26px;padding:13px 24px;border-radius:50px;
+  background:var(--green);color:var(--white);font-weight:600;font-size:.92rem;letter-spacing:.02em;
+  border:1px solid transparent;width:fit-content;transition:transform .25s,background .25s,color .25s,border-color .25s;
+}
+.work-btn:hover{transform:translateY(-2px);background:var(--green-dark);}
+[data-theme="dark"] .work-btn{color:#121410;}
+[data-theme="dark"] .work-btn:hover{background:var(--gold);color:#121410;}
 .work-email{text-align:center;margin-top:56px;}
 .work-email p{font-family:var(--serif);font-size:1.5rem;color:var(--green);margin-bottom:20px;}
 [data-theme="dark"] .work-email p{color:var(--ink);}
