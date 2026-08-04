@@ -256,6 +256,9 @@ a{color:inherit;text-decoration:none;}
 .contact-form .btn{margin-top:4px;border:0;cursor:pointer;text-align:center;}
 .contact-form .btn:hover{transform:translateY(-1px);}
 .cf-note{margin-top:8px;font-size:.75rem;color:rgba(255,255,255,.62);line-height:1.5;}
+/* Honeypot — hidden from humans & screen readers, invisible to bots that read CSS/DOM */
+.cf-hp{position:absolute !important;left:-9999px !important;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;}
+.cf-hp *{font-size:0;}
 .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:28px;font-size:.82rem;color:rgba(255,255,255,.74);}
 
 /* ---------- Reveal animation ---------- */

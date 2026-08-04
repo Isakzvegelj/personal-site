@@ -68,11 +68,40 @@
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
+  /* ---- Email anti-scraper: rebuild mailto hrefs from split data-attrs ---- */
+  /* The addresses are kept out of a single scrapeable string in the HTML;
+     user + host are stored separately and recombined only in the browser. */
+  function emailFor(a) {
+    var user = a.getAttribute('data-email-user') || '';
+    var host = a.getAttribute('data-email-host') || '';
+    return user && host ? user + '@' + host : '';
+  }
+  var mailtoLinks = document.querySelectorAll('a.mailto');
+  Array.prototype.forEach.call(mailtoLinks, function (a) {
+    var addr = emailFor(a);
+    if (!addr) return;
+    var subject = a.getAttribute('data-email-subject') || '';
+    var href = 'mailto:' + addr;
+    if (subject) href += '?subject=' + encodeURIComponent(subject);
+    a.href = href;
+    a.removeAttribute('data-email-user');
+    a.removeAttribute('data-email-host');
+    if (a.classList.contains('mailto-self')) {
+      /* re-show the plain address as visible text for real visitors */
+      a.textContent = addr;
+    }
+  });
+
   /* contact form → compose an email */
   var cf = document.getElementById('contactForm');
   if (cf) {
     cf.addEventListener('submit', function (e) {
       e.preventDefault();
+      /* honeypot: a real user never fills the hidden 'company' field */
+      var hp = document.getElementById('cfCompany');
+      if (hp && hp.value && String(hp.value).trim() !== '') {
+        return; /* silent discard — bot */
+      }
       var name = (document.getElementById('cfName').value || '').trim();
       var email = (document.getElementById('cfEmail').value || '').trim();
       var msg = (document.getElementById('cfMessage').value || '').trim();
@@ -82,7 +111,8 @@
       }
       var subject = 'New message from ' + name + ' (via isakzvegelj.github.io)';
       var body = 'Hi Isak,\n\n' + msg + '\n\n— ' + name + '\n' + email + '\n';
-      var href = 'mailto:inquire@isakzvegelj.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      var to = emailFor(cf) || (cf.getAttribute('data-email-user') + '@' + cf.getAttribute('data-email-host'));
+      var href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       window.location.href = href;
     });
   }

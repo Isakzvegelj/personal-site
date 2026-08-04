@@ -8,7 +8,9 @@
 <meta property="og:title" content="Isak Žvegelj — Olympic Rower, Creator & Website Builder">
 <meta property="og:description" content="Olympic rower, world-record holder, UPenn cognitive science. Building websites and products. Follow my results, or let's build yours.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/img/hero.webp">
+<meta property="og:url" content="https://isakzvegelj.com/">
+<meta property="og:image" content="https://isakzvegelj.com/assets/img/hero.webp">
+<link rel="canonical" href="https://isakzvegelj.com/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="alternate icon" href="assets/apple-touch-icon.png">
@@ -178,13 +180,13 @@
       <p class="section-intro">Real products I designed and shipped — live for clients right now.</p>
     </div>
     <div class="projects-grid">
-      <a class="project-card reveal" href="https://villa-pomona-bled.com" target="_blank" rel="noopener">
+      <a class="project-card reveal" href="https://villa-pomona-bled.com" target="_blank" rel="nofollow noopener noreferrer">
         <span class="proj-cat">Hotel · Bled</span>
         <h3>Villa Pomona Bled</h3>
         <p>Historic boutique hotel — booking-ready site with an AI concierge.</p>
         <span class="proj-link">villa-pomona-bled.com →</span>
       </a>
-      <a class="project-card reveal" href="https://maxisbled.com" target="_blank" rel="noopener">
+      <a class="project-card reveal" href="https://maxisbled.com" target="_blank" rel="nofollow noopener noreferrer">
         <span class="proj-cat">Real estate · Bled</span>
         <h3>Maxis Penthouse</h3>
         <p>Luxury penthouse showcase — clean, gallery-led, mobile-first.</p>
@@ -210,19 +212,19 @@
         <span class="work-icon">🚣</span>
         <h3>Become a sponsor</h3>
         <p>Support me on my journey to excelence, on and off the water.</p>
-        <a class="work-btn" href="mailto:sponsor@isakzvegelj.com?subject=Sponsorship%20proposal%20-%20Isak%20Zvegelj">Request sponsorship deck</a>
+        <a class="work-btn mailto" data-email-user="sponsor" data-email-host="isakzvegelj.com" data-email-subject="Sponsorship proposal - Isak Zvegelj" href="#">Request sponsorship deck</a>
         <p class="work-sub">Support Isak on his rowing journey</p>
       </div>
       <div class="work-card reveal">
         <span class="work-icon">💻</span>
         <h3>Order a website</h3>
         <p>Clean, fast, mobile-first websites and digital products — built with precision and same discipline, leveraging the lessons that elite rowing has given me. Hotels, clinics, artists, businesses, side projects. Let's talk about yours.</p>
-        <a class="work-btn" href="mailto:inquire@isakzvegelj.com?subject=Website%20project%20-%20Isak%20Zvegelj">Start a project</a>
+        <a class="work-btn mailto" data-email-user="inquire" data-email-host="isakzvegelj.com" data-email-subject="Website project - Isak Zvegelj" href="#">Start a project</a>
       </div>
     </div>
     <div class="work-email reveal">
       <p>Prefer to email directly? I answer every message.</p>
-      <a class="btn btn-dark" href="mailto:inquire@isakzvegelj.com">inquire@isakzvegelj.com</a>
+      <a class="btn btn-dark mailto mailto-self" data-email-user="inquire" data-email-host="isakzvegelj.com" href="#">[email]</a>
     </div>
   </div>
 </section>
@@ -237,13 +239,13 @@
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
-        <a href="mailto:inquire@isakzvegelj.com">inquire@isakzvegelj.com</a>
-        <a href="mailto:sponsor@isakzvegelj.com">sponsor@isakzvegelj.com</a>
-        <a href="mailto:isakzv@gmail.com">isakzv@gmail.com</a>
-        <a href="https://youtube.com/@RisedCreativity" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://instagram.com/isakzvegelj" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://linkedin.com/in/isak-zvegelj" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/Isakzvegelj" target="_blank" rel="noopener">GitHub</a>
+        <a class="mailto mailto-self" data-email-user="inquire" data-email-host="isakzvegelj.com" href="#">[email]</a>
+        <a class="mailto mailto-self" data-email-user="sponsor" data-email-host="isakzvegelj.com" href="#">[email]</a>
+        <a class="mailto mailto-self" data-email-user="isakzv" data-email-host="gmail.com" href="#">[email]</a>
+        <a href="https://youtube.com/@RisedCreativity" target="_blank" rel="nofollow noopener noreferrer">YouTube</a>
+        <a href="https://instagram.com/isakzvegelj" target="_blank" rel="nofollow noopener noreferrer">Instagram</a>
+        <a href="https://linkedin.com/in/isak-zvegelj" target="_blank" rel="nofollow noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/Isakzvegelj" target="_blank" rel="nofollow noopener noreferrer">GitHub</a>
       </div>
       <div class="footer-col">
         <h4>Site</h4>
@@ -255,7 +257,11 @@
       </div>
       <div class="footer-col footer-col-wide">
         <h4>Send a message</h4>
-        <form class="contact-form" id="contactForm" novalidate>
+        <form class="contact-form" id="contactForm" novalidate data-email-user="inquire" data-email-host="isakzvegelj.com">
+          <div class="cf-hp" aria-hidden="true">
+            <label for="cfCompany">Company</label>
+            <input type="text" id="cfCompany" name="company" tabindex="-1" autocomplete="off">
+          </div>
           <div class="cf-row">
             <input type="text" name="name" id="cfName" placeholder="Your name" required>
           </div>

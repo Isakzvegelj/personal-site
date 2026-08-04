@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://isakzvegelj.github.io/personal-site/</loc>
+    <loc>https://isakzvegelj.com/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <lastmod>2026-08-04</lastmod>
   </url>
   <url>
-    <loc>https://isakzvegelj.github.io/personal-site/blog/</loc>
+    <loc>https://isakzvegelj.com/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-08-04</lastmod>
