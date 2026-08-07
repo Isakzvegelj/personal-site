@@ -13,6 +13,21 @@
   }
   applyTheme(stored || (systemDark ? 'dark' : 'light'));
   var themeToggle = document.getElementById('themeToggle');
+  var navLinksForTheme = document.getElementById('navLinks');
+  var navToggleForTheme = document.getElementById('navToggle');
+  var desktopThemeParent = themeToggle ? themeToggle.parentNode : null;
+  function positionThemeToggle() {
+    if (!themeToggle || !navLinksForTheme || !desktopThemeParent) return;
+    if (window.matchMedia('(max-width: 860px)').matches) {
+      navLinksForTheme.appendChild(themeToggle);
+    } else if (themeToggle.parentNode !== desktopThemeParent) {
+      desktopThemeParent.insertBefore(themeToggle, navToggleForTheme);
+    }
+  }
+  positionThemeToggle();
+  if (window.matchMedia) {
+    window.matchMedia('(max-width: 860px)').addEventListener('change', positionThemeToggle);
+  }
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
       var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
