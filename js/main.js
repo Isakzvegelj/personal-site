@@ -52,11 +52,15 @@
     links.classList.remove('open');
     toggle.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('menu-open');
+    document.body.classList.remove('menu-open');
   }
   toggle.addEventListener('click', function () {
     var open = links.classList.toggle('open');
     toggle.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.documentElement.classList.toggle('menu-open', open);
+    document.body.classList.toggle('menu-open', open);
   });
   /* close nav when a link is tapped */
   Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
