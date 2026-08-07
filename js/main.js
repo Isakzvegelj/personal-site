@@ -48,19 +48,35 @@
   /* Mobile nav toggle */
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
+  var lockedScrollY = 0;
+  function lockPageScroll() {
+    lockedScrollY = window.scrollY || window.pageYOffset || 0;
+    document.documentElement.classList.add('menu-open');
+    document.body.classList.add('menu-open');
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + lockedScrollY + 'px';
+    document.body.style.width = '100%';
+  }
+  function unlockPageScroll() {
+    document.documentElement.classList.remove('menu-open');
+    document.body.classList.remove('menu-open');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, lockedScrollY);
+  }
   function closeNav() {
     links.classList.remove('open');
     toggle.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
-    document.documentElement.classList.remove('menu-open');
-    document.body.classList.remove('menu-open');
+    unlockPageScroll();
   }
   toggle.addEventListener('click', function () {
     var open = links.classList.toggle('open');
     toggle.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    document.documentElement.classList.toggle('menu-open', open);
-    document.body.classList.toggle('menu-open', open);
+    if (open) lockPageScroll();
+    else unlockPageScroll();
   });
   /* close nav when a link is tapped */
   Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
