@@ -2,6 +2,20 @@
 (function () {
   'use strict';
 
+  /* Mobile back-to-top control */
+  var backToTop = document.createElement('button');
+  backToTop.className = 'back-to-top';
+  backToTop.type = 'button';
+  backToTop.setAttribute('aria-label', 'Back to top');
+  backToTop.innerHTML = '&#8593;';
+  document.body.appendChild(backToTop);
+  function updateBackToTop() { backToTop.classList.toggle('visible', window.scrollY > 300); }
+  window.addEventListener('scroll', updateBackToTop, { passive: true });
+  backToTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  updateBackToTop();
+
   /* ---- Dark mode ---- */
   var root = document.documentElement;
   var stored = null;

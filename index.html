@@ -48,7 +48,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=quality-pass-5">
+<link rel="stylesheet" href="css/site.css?v=quality-pass-6">
 <script>
 (function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
 </script>
@@ -90,6 +90,7 @@
       <a href="mailto:inquire@isakzvegelj.com?subject=Website%20project%20-%20Isak%20Zvegelj" class="btn btn-ghost">Work With Me</a>
     </div>
   </div>
+  <img class="hero-foreground" src="assets/img/hero-foreground.png" width="1536" height="1024" alt="" aria-hidden="true" decoding="async">
   <a class="scroll-cue" href="#about" aria-label="Scroll down"><span></span></a>
 </section>
 
@@ -135,51 +136,27 @@
       <p class="section-intro">A snapshot of where I've been and what I'm chasing next.</p>
     </div>
 
-    <div class="results-grid">
-      <div class="result-card reveal">
-        <h3>Recently</h3>
-        <ul class="result-list">
-          <li>
-            <span class="result-event">European Rowing Championships <em>· Varese, Italy · 2026</em></span>
-            <span class="result-line"><strong>Men's Pair — Final B</strong><span class="result-medal gold">1st</span></span>
-          </li>
-          <li>
-            <span class="result-event">European Rowing Championships <em>· Varese, Italy · 2026</em></span>
-            <span class="result-line"><strong>Men's Pair — Heat</strong><span class="result-medal">3rd</span></span>
-          </li>
-          <li>
-            <span class="result-event">World Rowing Cup III <em>· Lucerne, Switzerland · 2026</em></span>
-            <span class="result-line"><strong>Men's Single Sculls — Final B</strong><span class="result-medal">5th</span></span>
-          </li>
-          <li>
-            <span class="result-event">World Rowing Cup I <em>· Seville, Spain · 2026</em></span>
-            <span class="result-line"><strong>Men's Pair</strong><span class="result-medal">Finalist</span></span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="result-card reveal">
-        <h3>Career highs</h3>
-        <ul class="result-list">
-          <li>
-            <span class="result-tag">Olympic Games</span>
-            <p class="result-desc"><strong>Paris 2024</strong> — Men's Single Sculls, qualified for the quarterfinals via the repechage.</p>
-          </li>
-          <li>
-            <span class="result-tag">World Record</span>
-            <p class="result-desc"><strong>10,000m indoor rower</strong> (Concept2, slides) — <strong>31:48.3</strong>, a 1:35.4/500m split.</p>
-          </li>
-          <li>
-            <span class="result-tag">Qualification</span>
-            <p class="result-desc"><strong>World Rowing Final Olympic Qualification 2024</strong> — earned Slovenia's single scull spot for Paris.</p>
-          </li>
-          <li>
-            <span class="result-tag">University</span>
-            <p class="result-desc"><strong>Varsity rower at UPenn</strong> — heavyweight team, U.S. collegiate system.</p>
-          </li>
-        </ul>
+    <div class="results-marquee reveal" aria-label="Selected rowing results">
+      <div class="results-marquee-track">
+        <div class="results-marquee-set">
+          <article class="result-slide"><span class="result-slide-label">European Championships · 2026</span><strong>Men's Pair</strong><span class="result-slide-place gold">1st · Final B</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Rowing Cup III · 2026</span><strong>Men's Single Sculls</strong><span class="result-slide-place">5th · Final B</span></article>
+          <article class="result-slide"><span class="result-slide-label">Olympic Games · Paris 2024</span><strong>Men's Single Sculls</strong><span class="result-slide-place">Quarterfinalist</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Record · Concept2</span><strong>10,000m Indoor Rower</strong><span class="result-slide-place gold">31:48.3</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Rowing Cup I · 2026</span><strong>Men's Pair</strong><span class="result-slide-place">Finalist</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Olympic Qualification · 2024</span><strong>Men's Single Sculls</strong><span class="result-slide-place">Qualified for Paris</span></article>
+        </div>
+        <div class="results-marquee-set" aria-hidden="true">
+          <article class="result-slide"><span class="result-slide-label">European Championships · 2026</span><strong>Men's Pair</strong><span class="result-slide-place gold">1st · Final B</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Rowing Cup III · 2026</span><strong>Men's Single Sculls</strong><span class="result-slide-place">5th · Final B</span></article>
+          <article class="result-slide"><span class="result-slide-label">Olympic Games · Paris 2024</span><strong>Men's Single Sculls</strong><span class="result-slide-place">Quarterfinalist</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Record · Concept2</span><strong>10,000m Indoor Rower</strong><span class="result-slide-place gold">31:48.3</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Rowing Cup I · 2026</span><strong>Men's Pair</strong><span class="result-slide-place">Finalist</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Olympic Qualification · 2024</span><strong>Men's Single Sculls</strong><span class="result-slide-place">Qualified for Paris</span></article>
+        </div>
       </div>
     </div>
+    <p class="results-marquee-note">A few numbers from the journey <span aria-hidden="true">↗</span></p>
   </div>
 </section>
 
