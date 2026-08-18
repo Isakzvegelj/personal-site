@@ -3,42 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
 <title>Blog — Isak Žvegelj</title>
 <meta name="description" content="Updates and articles from Isak Žvegelj — racing, building, and everything in between.">
 <link rel="canonical" href="https://isakzvegelj.com/blog/">
 <meta property="og:title" content="Blog — Isak Žvegelj">
+<meta property="og:description" content="Updates and articles from Isak Žvegelj — racing, building, and everything in between.">
+<meta property="og:url" content="https://isakzvegelj.com/blog/">
+<meta property="og:site_name" content="Isak Žvegelj">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://isakzvegelj.com/assets/img/hero.webp">
+<meta property="og:image:alt" content="Isak Žvegelj rowing for Slovenia on the water">
+<meta property="og:image:width" content="2880">
+<meta property="og:image:height" content="1920">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog — Isak Žvegelj">
+<meta name="twitter:description" content="Updates and articles from Isak Žvegelj — racing, building, and everything in between.">
+<meta name="twitter:image" content="https://isakzvegelj.com/assets/img/hero.webp">
+<meta name="twitter:image:alt" content="Isak Žvegelj rowing for Slovenia on the water">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="alternate icon" href="../assets/apple-touch-icon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/site.css?v=quality-pass-1">
 <script>
-(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
+(function(){document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
 </script>
+<script>(function(){if(!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)){var s=document.createElement('script');s.type='module';s.src='https://static.cloudflareinsights.com/beacon.min.js';s.dataset.cfBeacon='{"token":"cd9b13f3fc134ab98ea0e712d7ef14e2"}';document.head.appendChild(s);}})();</script>
 </head>
 <body class="subpage">
 
 <header class="site-header scrolled" id="siteHeader">
   <div class="container nav-row">
     <a href="../index.html#home" class="logo">Isak <span>Žvegelj</span></a>
-    <nav class="nav-links" id="navLinks">
+    <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
       <a href="../index.html#about">About</a>
       <a href="../index.html#results">Results</a>
-      <a href="../index.html#creator">Creator</a>
-      <a href="../index.html#projects">Projects</a>
-      <a href="../index.html#work">Work with me</a>
+      <a href="../websites/">Websites</a>
+      <a href="../sponsors/">Partnerships</a>
       <a href="index.html" class="active">Blog</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
       <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
     </button>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -48,7 +58,7 @@
   <section class="page-hero">
     <div class="container">
       <p class="eyebrow">Blog</p>
-      <h1>Updates & articles</h1>
+      <h1>Updates &amp; articles</h1>
       <p class="page-lead">What's going on — racing, building, and everything in between.</p>
     </div>
   </section>
@@ -66,7 +76,7 @@
   <div class="container">
     <div class="footer-bottom">
       <p>© <span id="year"></span> Isak Žvegelj. All rights reserved.</p>
-      <p>Built with discipline. 🚣</p>
+      <p>Built with discipline. <a href="../privacy.html">Privacy</a></p>
     </div>
   </div>
 </footer>

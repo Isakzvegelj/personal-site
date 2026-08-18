@@ -21,12 +21,18 @@
   var stored = null;
   try { stored = localStorage.getItem('theme'); } catch (e) {}
   var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var themeToggle = document.getElementById('themeToggle');
   function applyTheme(theme) {
     if (theme === 'dark') root.setAttribute('data-theme', 'dark');
     else root.removeAttribute('data-theme');
+    if (themeToggle) {
+      var isDark = theme === 'dark';
+      themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      themeToggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
   }
   applyTheme(stored || (systemDark ? 'dark' : 'light'));
-  var themeToggle = document.getElementById('themeToggle');
   var navLinksForTheme = document.getElementById('navLinks');
   var navToggleForTheme = document.getElementById('navToggle');
   var desktopThemeParent = themeToggle ? themeToggle.parentNode : null;
@@ -53,6 +59,7 @@
   /* Header: add .scrolled past 40px */
   var header = document.getElementById('siteHeader');
   function onScroll() {
+    if (!header) return;
     if (window.scrollY > 40) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
   }
@@ -80,22 +87,24 @@
     window.scrollTo(0, lockedScrollY);
   }
   function closeNav() {
+    if (!links || !toggle) return;
     links.classList.remove('open');
     toggle.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
     unlockPageScroll();
   }
-  toggle.addEventListener('click', function () {
-    var open = links.classList.toggle('open');
-    toggle.classList.toggle('open', open);
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (open) lockPageScroll();
-    else unlockPageScroll();
-  });
-  /* close nav when a link is tapped */
-  Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
-    a.addEventListener('click', closeNav);
-  });
+  if (toggle && links) {
+    toggle.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) lockPageScroll();
+      else unlockPageScroll();
+    });
+    Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', closeNav);
+    });
+  }
 
   /* Scroll reveal */
   var revealEls = document.querySelectorAll('.reveal');
@@ -141,28 +150,62 @@
     }
   });
 
-  /* contact form → compose an email */
+  /* contact form: use a configured static endpoint, otherwise email fallback */
   var cf = document.getElementById('contactForm');
   if (cf) {
     cf.addEventListener('submit', function (e) {
       e.preventDefault();
-      /* honeypot: a real user never fills the hidden 'company' field */
       var hp = document.getElementById('cfCompany');
-      if (hp && hp.value && String(hp.value).trim() !== '') {
-        return; /* silent discard — bot */
-      }
-      var name = (document.getElementById('cfName').value || '').trim();
-      var email = (document.getElementById('cfEmail').value || '').trim();
-      var msg = (document.getElementById('cfMessage').value || '').trim();
-      if (!name || !email || !msg) {
-        alert('Please fill in your name, email and message first.');
+      var status = document.getElementById('cfStatus');
+      var nameEl = document.getElementById('cfName');
+      var emailEl = document.getElementById('cfEmail');
+      var msgEl = document.getElementById('cfMessage');
+      var name = (nameEl.value || '').trim();
+      var email = (emailEl.value || '').trim();
+      var msg = (msgEl.value || '').trim();
+      if (hp && hp.value.trim()) return;
+      if (!name || !email || !msg || !emailEl.checkValidity()) {
+        if (status) status.textContent = 'Please enter your name, a valid email, and a message.';
+        (name ? emailEl : nameEl).focus();
         return;
       }
-      var subject = 'New message from ' + name + ' (via isakzvegelj.github.io)';
-      var body = 'Hi Isak,\n\n' + msg + '\n\n— ' + name + '\n' + email + '\n';
+      var subject = 'New message from ' + name + ' (via isakzvegelj.com)';
+      var body = ['Hi Isak,', '', msg, '', '— ' + name, email, ''].join(String.fromCharCode(10));
       var to = emailFor(cf) || (cf.getAttribute('data-email-user') + '@' + cf.getAttribute('data-email-host'));
-      var href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      window.location.href = href;
+      if (status) status.textContent = 'Opening your email app…';
+      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     });
   }
+
+  /* Scrollable results controls */
+  var resultsMarquee = document.querySelector('.results-marquee');
+  Array.prototype.forEach.call(document.querySelectorAll('[data-marquee-direction]'), function (button) {
+    button.addEventListener('click', function () {
+      if (!resultsMarquee) return;
+      var distance = button.getAttribute('data-marquee-direction') === 'prev' ? -320 : 320;
+      var track = resultsMarquee.querySelector('.results-marquee-track');
+      if (track) track.style.animationPlayState = 'paused';
+      resultsMarquee.scrollBy({ left: distance, behavior: 'smooth' });
+    });
+  });
+
+  /* YouTube façade: load the third-party iframe only after an explicit click */
+  Array.prototype.forEach.call(document.querySelectorAll('.video-facade'), function (button) {
+    var poster = button.querySelector('img[data-fallback-src]');
+    if (poster) poster.addEventListener('error', function () {
+      var fallback = poster.getAttribute('data-fallback-src');
+      if (fallback && poster.src !== fallback) poster.src = fallback;
+    });
+    button.addEventListener('click', function () {
+      var id = button.getAttribute('data-video-id');
+      var start = button.getAttribute('data-video-start') || '0';
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?start=' + encodeURIComponent(start) + '&rel=0';
+      iframe.title = 'Isak Žvegelj rowing';
+      iframe.loading = 'lazy';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      button.replaceWith(iframe);
+    });
+  });
 })();

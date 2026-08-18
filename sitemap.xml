@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://isakzvegelj.com/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-    <lastmod>2026-08-08</lastmod>
-  </url>
-  <url>
-    <loc>https://isakzvegelj.com/blog/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-08-04</lastmod>
-  </url>
+  <url><loc>https://isakzvegelj.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority><lastmod>2026-08-15</lastmod></url>
+  <url><loc>https://isakzvegelj.com/sponsors/</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-08-15</lastmod></url>
+  <url><loc>https://isakzvegelj.com/websites/</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-08-15</lastmod></url>
+  <url><loc>https://isakzvegelj.com/privacy.html</loc><changefreq>yearly</changefreq><priority>0.2</priority><lastmod>2026-08-15</lastmod></url>
+  <url><loc>https://isakzvegelj.com/blog/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2026-08-18</lastmod></url>
+  <url><loc>https://isakzvegelj.com/blog/paris-2024-reflections.html</loc><changefreq>monthly</changefreq><priority>0.6</priority><lastmod>2026-08-18</lastmod></url>
 </urlset>
