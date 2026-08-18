@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Isak's blog publish tool — type an article, hit Publish, it's live.
 
-Run:  python3 /Users/isakzvegelj/projects/personal-site/blog/publish.py
+Run:  python3 /Users/isakzvegelj/isak/personal-site/blog/publish.py
 Then open the printed URL in your browser.
 
 The page lets you paste a title + article (plain text or light markdown),
 click Publish, and it:
   1. converts your text to HTML
   2. appends a new entry to blog/posts.js
-  3. commits and pushes to GitHub (main) -> isakzvegelj.com/blog goes live.
+  3. commits and pushes to the staging branch for review (set BLOG_BRANCH=main only when intentionally publishing live).
 
 Stdlib only. No installs.
 """
@@ -25,6 +25,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))          # .../blog
 REPO = os.path.dirname(BASE)                                # .../personal-site
 POSTS_FILE = os.path.join(BASE, "posts.js")
 LIVE_URL = "https://isakzvegelj.com/blog/"
+BRANCH = os.environ.get("BLOG_BRANCH", "staging")
 
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("BLOG_PORT", "8123"))
@@ -120,8 +121,8 @@ def publish(entry):
     insert_into_posts(entry)
     git(["git", "add", "blog/posts.js"])
     git(["git", "commit", "-m", f"Add blog post"])
-    pull = git(["git", "pull", "--rebase", "origin", "main"])
-    push = git(["git", "push", "origin", "main"])
+    pull = git(["git", "pull", "--rebase", "origin", BRANCH])
+    push = git(["git", "push", "origin", BRANCH])
     if pull.returncode != 0:
         return False, "git pull failed: " + pull.stderr.strip()
     if push.returncode != 0:

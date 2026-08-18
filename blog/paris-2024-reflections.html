@@ -24,7 +24,7 @@
 <link rel="alternate icon" href="../assets/apple-touch-icon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preload" href="../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=quality-pass-1">
+<link rel="stylesheet" href="../css/site.css?v=2026-08-18">
 <script>
 (function(){document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
 </script>
@@ -35,16 +35,15 @@
 <header class="site-header scrolled" id="siteHeader">
   <div class="container nav-row">
     <a href="../index.html#home" class="logo">Isak <span>Žvegelj</span></a>
-    <nav class="nav-links" id="navLinks">
+    <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
       <a href="../index.html#about">About</a>
       <a href="../index.html#results">Results</a>
-      <a href="../index.html#creator">Creator</a>
-      <a href="../index.html#projects">Projects</a>
-      <a href="../index.html#work">Work with me</a>
+      <a href="../websites/">Websites</a>
+      <a href="../sponsors/">Partnerships</a>
       <a href="index.html" class="active">Blog</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
-    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
       <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
     </button>
@@ -53,8 +52,9 @@
     </button>
   </div>
 </header>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
-<main class="page-wrap">
+<main id="main-content" class="page-wrap">
   <article class="page-hero post-hero">
     <div class="container">
       <p class="back-link"><a href="index.html">← Back to blog</a></p>
@@ -88,6 +88,6 @@
   </div>
 </footer>
 
-<script src="../js/main.js?v=quality-pass-1"></script>
+<script src="../js/main.js?v=2026-08-18"></script>
 </body>
 </html>

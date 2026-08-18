@@ -1,7 +1,7 @@
 # How to make a blog post — isakzvegelj.com/blog
 
 The absolute easiest way: use the **publish tool**. You type a title and
-your article into a simple page, click **Publish**, and it goes live —
+your article into a simple page, click **Publish**, and it is pushed to the staging branch for review —
 no HTML, no git, no terminal needed.
 
 ---
@@ -10,7 +10,7 @@ no HTML, no git, no terminal needed.
 
 1. Open a terminal and run:
 
-       bash /Users/isakzvegelj/projects/personal-site/blog/start.sh
+       bash /Users/isakzvegelj/isak/personal-site/blog/start.sh
 
    (It opens the "New blog post" page in your browser automatically.
    Bookmark http://localhost:8123/ too — the tool must be running to
@@ -48,16 +48,16 @@ don't have to learn any of this.
 
 ## Older way — edit posts.js by hand
 
-Your blog lives at `/Users/isakzvegelj/projects/personal-site/blog/`.
+Your blog lives at `/Users/isakzvegelj/isak/personal-site/blog/`.
 The whole thing is static and driven by one data file, `blog/posts.js`.
 To publish a post you add one entry to that file, then commit + push.
-GitHub Pages deploys automatically from the `main` branch.
+The site's staging branch is for review; merge it into `main` only after approval.
 
 If you want to do it by hand, here's exactly what to do.
 
 ### Step 1 — Open the right file
 
-    /Users/isakzvegelj/projects/personal-site/blog/posts.js
+    /Users/isakzvegelj/isak/personal-site/blog/posts.js
 
 ### Step 2 — Understand the format
 
@@ -110,7 +110,7 @@ Rules to remember:
 
 ### Step 4 — Add an image (optional)
 
-Put the image file in `/Users/isakzvegelj/projects/personal-site/blog/`
+Put the image file in `/Users/isakzvegelj/isak/personal-site/blog/`
 (or in `assets/img/`), then reference it from the content. If you save it
 as `blog/my-photo.webp`:
 
@@ -122,7 +122,7 @@ Supported formats: `.webp` (best), `.jpg`, `.png`.
 
 Preview locally before publishing:
 
-    cd /Users/isakzvegelj/projects/personal-site
+    cd /Users/isakzvegelj/isak/personal-site
     python3 -m http.server 8877
 
 Then open http://localhost:8877/blog/ in your browser. Click your post to
@@ -130,10 +130,12 @@ see the full article. Hit Ctrl+C when done.
 
 ### Step 6 — Publish
 
-    cd /Users/isakzvegelj/projects/personal-site
+    cd /Users/isakzvegelj/isak/personal-site
     git add blog/posts.js
     git commit -m "Add blog post: <your title>"
-    git push origin main
+    git push origin staging
+
+# Promote only after review: git switch main && git merge --no-ff staging && git push origin main
 
 Wait about a minute, then check https://isakzvegelj.com/blog/
 
