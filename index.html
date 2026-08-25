@@ -9,9 +9,10 @@
 <meta property="og:description" content="Olympic rower, world-record holder, UPenn cognitive science. Building websites and products. Follow my results, or let's build yours.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://isakzvegelj.com/">
-<meta property="og:image" content="https://isakzvegelj.com/assets/img/hero-3840.webp">
-<meta property="og:image:width" content="3840">
-<meta property="og:image:height" content="2560">
+<meta property="og:image" content="https://isakzvegelj.com/assets/img/social-share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <link rel="canonical" href="https://isakzvegelj.com/">
 <script type="application/ld+json">
 {
@@ -52,27 +53,49 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Isak Žvegelj — Olympic Rower, Creator & Website Builder">
 <meta name="twitter:description" content="Olympic rower, world-record holder and website builder from Slovenia. Follow my results or work with me on a fast, thoughtful website.">
-<meta name="twitter:image" content="https://isakzvegelj.com/assets/img/hero.webp">
+<meta name="twitter:image" content="https://isakzvegelj.com/assets/img/social-share.jpg">
 <meta name="twitter:image:alt" content="Isak Žvegelj rowing for Slovenia on the water">
-<link rel="preload" as="image" href="assets/img/hero.webp" imagesrcset="assets/img/hero.webp 2880w, assets/img/hero-3840.webp 3840w" imagesizes="100vw" fetchpriority="high">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Isak Žvegelj",
+  "url": "https://isakzvegelj.com/",
+  "image": "https://isakzvegelj.com/assets/img/social-share.jpg",
+  "jobTitle": "Website builder",
+  "description": "Slovenian Olympic rower (Paris 2024), world-record holder and computational cognitive science graduate from the University of Pennsylvania. Builds websites and digital products.",
+  "nationality": {"@type": "Country", "name": "Slovenia"},
+  "alumniOf": {"@type": "CollegeOrUniversity", "name": "University of Pennsylvania"},
+  "sameAs": [
+    "https://instagram.com/isakzvegelj",
+    "https://linkedin.com/in/isak-zvegelj",
+    "https://github.com/Isakzvegelj"
+  ],
+  "knowsAbout": ["Rowing", "Web development", "Cognitive science"]
+}
+</script>
+<link rel="preload" as="image" href="assets/img/hero.webp" imagesrcset="assets/img/responsive/hero-960.webp 960w, assets/img/responsive/hero-1600.webp 1600w, assets/img/responsive/hero-2400.webp 2400w, assets/img/hero.webp 2880w, assets/img/hero-3840.webp 3840w" imagesizes="100vw" fetchpriority="high">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="alternate icon" href="assets/apple-touch-icon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=quality-pass-6">
+<link rel="preconnect" href="https://static.cloudflareinsights.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="css/site.css?v=projects-rail-1">
 <script>
-(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
+document.documentElement.classList.add('js');(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "cd9b13f3fc134ab98ea0e712d7ef14e2"}'></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <header class="site-header" id="siteHeader">
   <div class="container nav-row">
     <a href="#home" class="logo">Isak <span>Žvegelj</span></a>
-    <nav class="nav-links" id="navLinks">
+    <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
       <a href="#about">About</a>
       <a href="#results">Results</a>
       <a href="#creator">Creator</a>
@@ -82,19 +105,20 @@
       <a href="#work">Work with me</a>
       <a href="#contact">Contact</a>
     </nav>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle dark mode">
       <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
     </button>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
+<main id="main-content">
 <!-- HERO -->
 <section class="hero" id="home">
-  <img class="hero-media" src="assets/img/hero.webp" srcset="assets/img/hero.webp 2880w, assets/img/hero-3840.webp 3840w" sizes="100vw" width="2880" height="1920" alt="Isak Žvegelj rowing for Slovenia on the water" fetchpriority="high" decoding="async">
+  <img class="hero-media" src="assets/img/hero.webp" srcset="assets/img/responsive/hero-960.webp 960w, assets/img/responsive/hero-1600.webp 1600w, assets/img/responsive/hero-2400.webp 2400w, assets/img/hero.webp 2880w, assets/img/hero-3840.webp 3840w" sizes="100vw" width="2880" height="1920" alt="Isak Žvegelj rowing for Slovenia on the water" fetchpriority="high" decoding="async">
   <div class="hero-overlay"></div>
   <div class="container hero-content">
     <p class="hero-kicker">Olympic Rower · Creator · Cognitive Science</p>
@@ -112,12 +136,12 @@
 <section class="section" id="about">
   <div class="container about-grid">
     <div class="about-media reveal">
-      <img src="assets/img/profile.webp" width="1152" height="1440" loading="lazy" decoding="async" alt="Portrait of Isak Žvegelj">
+      <img src="assets/img/profile.webp" srcset="assets/img/responsive/profile-480.webp 480w, assets/img/profile.webp 1152w" sizes="220px" width="1152" height="1440" loading="lazy" decoding="async" alt="Portrait of Isak Žvegelj">
     </div>
     <div class="about-text reveal">
       <p class="eyebrow">About</p>
       <h2 class="section-title">Discipline on the water.<br>Curiosity everywhere else.</h2>
-      <p>I grew up in Bled, Slovenia — the son of an Olympic medallist — and dedicated over a decade to the historic sport of rowing. I rowed Slovenia's <strong>men's single scull at the Paris 2024 Olympics</strong>, made the grand international final at a World Cups, finished 7th on European Championships, and hold a <strong>world record</strong> on the indoor rower.</p>
+      <p>I grew up in Bled, Slovenia — the son of an Olympic medallist — and dedicated over a decade to the historic sport of rowing. I rowed Slovenia's <strong>men's single scull at the Paris 2024 Olympics</strong>, reached an A-final at a World Cup, finished 7th at the European Championships, and hold a <strong>world record</strong> on the indoor rower.</p>
       <p>Off the water I studied <strong>computational cognitive science at the University of Pennsylvania</strong> — bridging sport, science and software. Today I build websites and digital products for clients across Slovenia and beyond, leveraging the beautiful ideas I get while rowing. </p>
       <div class="stats-row">
         <div class="stat">
@@ -146,27 +170,28 @@
   <div class="container">
     <div class="section-head reveal">
       <p class="eyebrow">Results</p>
-      <h2 class="section-title">Recent results & career highs</h2>
+      <h2 class="section-title" id="results-heading">Recent results & career highs</h2>
       <p class="section-intro">A snapshot of where I've been and what I'm chasing next.</p>
     </div>
 
-    <div class="results-marquee reveal" aria-label="Selected rowing results">
+    <div class="results-marquee reveal" role="region" aria-labelledby="results-heading">
+       <button class="marquee-toggle" type="button" aria-pressed="false">Pause motion</button>
       <div class="results-marquee-track">
         <div class="results-marquee-set">
-          <article class="result-slide"><span class="result-slide-label">European Championships · 2026</span><strong>Men's Pair</strong><span class="result-slide-place gold">1st · Final B</span></article>
-          <article class="result-slide"><span class="result-slide-label">World Rowing Cup III · 2026</span><strong>Men's Single Sculls</strong><span class="result-slide-place">5th · Final B</span></article>
-          <article class="result-slide"><span class="result-slide-label">Olympic Games · Paris 2024</span><strong>Men's Single Sculls</strong><span class="result-slide-place">Quarterfinalist</span></article>
-          <article class="result-slide"><span class="result-slide-label">World Record · Concept2</span><strong>10,000m Indoor Rower</strong><span class="result-slide-place gold">31:48.3</span></article>
-          <article class="result-slide"><span class="result-slide-label">World Rowing Cup I · 2026</span><strong>Men's Pair</strong><span class="result-slide-place">Finalist</span></article>
-          <article class="result-slide"><span class="result-slide-label">World Olympic Qualification · 2024</span><strong>Men's Single Sculls</strong><span class="result-slide-place">Qualified for Paris</span></article>
+          <article class="result-slide"><span class="result-slide-label">European Championships · 2026</span><h3>Men's Pair</h3><span class="result-slide-place gold">1st · Final B</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Rowing Cup III · 2026</span><h3>Men's Single Sculls</h3><span class="result-slide-place">5th · Final B</span></article>
+          <article class="result-slide"><span class="result-slide-label">Olympic Games · Paris 2024</span><h3>Men's Single Sculls</h3><span class="result-slide-place">Quarterfinalist</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Record · Concept2</span><h3>10,000m Indoor Rower</h3><span class="result-slide-place gold">31:48.3</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Rowing Cup I · 2026</span><h3>Men's Pair</h3><span class="result-slide-place">Finalist</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Olympic Qualification · 2024</span><h3>Men's Single Sculls</h3><span class="result-slide-place">Qualified for Paris</span></article>
         </div>
         <div class="results-marquee-set" aria-hidden="true">
-          <article class="result-slide"><span class="result-slide-label">European Championships · 2026</span><strong>Men's Pair</strong><span class="result-slide-place gold">1st · Final B</span></article>
-          <article class="result-slide"><span class="result-slide-label">World Rowing Cup III · 2026</span><strong>Men's Single Sculls</strong><span class="result-slide-place">5th · Final B</span></article>
-          <article class="result-slide"><span class="result-slide-label">Olympic Games · Paris 2024</span><strong>Men's Single Sculls</strong><span class="result-slide-place">Quarterfinalist</span></article>
-          <article class="result-slide"><span class="result-slide-label">World Record · Concept2</span><strong>10,000m Indoor Rower</strong><span class="result-slide-place gold">31:48.3</span></article>
-          <article class="result-slide"><span class="result-slide-label">World Rowing Cup I · 2026</span><strong>Men's Pair</strong><span class="result-slide-place">Finalist</span></article>
-          <article class="result-slide"><span class="result-slide-label">World Olympic Qualification · 2024</span><strong>Men's Single Sculls</strong><span class="result-slide-place">Qualified for Paris</span></article>
+          <article class="result-slide"><span class="result-slide-label">European Championships · 2026</span><h3>Men's Pair</h3><span class="result-slide-place gold">1st · Final B</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Rowing Cup III · 2026</span><h3>Men's Single Sculls</h3><span class="result-slide-place">5th · Final B</span></article>
+          <article class="result-slide"><span class="result-slide-label">Olympic Games · Paris 2024</span><h3>Men's Single Sculls</h3><span class="result-slide-place">Quarterfinalist</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Record · Concept2</span><h3>10,000m Indoor Rower</h3><span class="result-slide-place gold">31:48.3</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Rowing Cup I · 2026</span><h3>Men's Pair</h3><span class="result-slide-place">Finalist</span></article>
+          <article class="result-slide"><span class="result-slide-label">World Olympic Qualification · 2024</span><h3>Men's Single Sculls</h3><span class="result-slide-place">Qualified for Paris</span></article>
         </div>
       </div>
     </div>
@@ -183,7 +208,7 @@
     </div>
     <div class="creator-story reveal">
       <p>Rowing taught me pacing, process and pressure. Penn taught me how the mind works — and how technology can amplify it. I've turned that combination into a one-person studio that ships clean, fast, mobile-friendly websites and tools for businesses around Bled and beyond.</p>
-      <p>Finding balance to the demanding sport of rowing in the science of computers and artificial intelligence applications. </p>
+      <p>I find balance between the demands of rowing and my work in computer science and artificial intelligence.</p>
     </div>
     <div class="rowing-video reveal" id="on-the-water">
       <div class="rowing-video-copy">
@@ -197,9 +222,9 @@
       </div>
     </div>
     <div class="creator-gallery reveal">
-      <figure><img src="assets/img/actionA.webp" width="1600" height="1066" loading="lazy" decoding="async" alt="Isak at the 2026 World Rowing Cup in Lucerne"><figcaption>World Rowing Cup III · Lucerne 2026</figcaption></figure>
-      <figure><img src="assets/img/actionB.webp" width="1600" height="1066" loading="lazy" decoding="async" alt="Isak (bow) racing the men's pair at the 2026 World Rowing Cup in Seville"><figcaption>Men's Pair · Seville 2026</figcaption></figure>
-      <figure><img src="assets/img/slo-pair-press.webp" width="2000" height="1333" loading="lazy" decoding="async" alt="Isak (right) with his pair partner at Team Slovenia press day"><figcaption>With my pair partner · Team Slovenia</figcaption></figure>
+      <figure><img src="assets/img/actionA.webp" srcset="assets/img/responsive/actionA-640.webp 640w, assets/img/actionA.webp 1600w" sizes="(max-width: 520px) 300px, (max-width: 860px) 80vw, 360px" width="1600" height="1066" loading="lazy" decoding="async" alt="Isak at the 2026 World Rowing Cup in Lucerne"><figcaption>World Rowing Cup III · Lucerne 2026</figcaption></figure>
+      <figure><img src="assets/img/actionB.webp" srcset="assets/img/responsive/actionB-640.webp 640w, assets/img/actionB.webp 1600w" sizes="(max-width: 520px) 300px, (max-width: 860px) 80vw, 360px" width="1600" height="1066" loading="lazy" decoding="async" alt="Isak (bow) racing the men's pair at the 2026 World Rowing Cup in Seville"><figcaption>Men's Pair · Seville 2026</figcaption></figure>
+      <figure><img src="assets/img/slo-pair-press.webp" srcset="assets/img/responsive/slo-pair-press-640.webp 640w, assets/img/slo-pair-press.webp 2000w" sizes="(max-width: 520px) 300px, (max-width: 860px) 80vw, 360px" width="2000" height="1333" loading="lazy" decoding="async" alt="Isak (right) with his pair partner at Team Slovenia press day"><figcaption>With my pair partner · Team Slovenia</figcaption></figure>
     </div>
   </div>
 </section>
@@ -210,22 +235,26 @@
     <div class="section-head reveal">
       <p class="eyebrow">Creator · Portfolio</p>
       <h2 class="section-title">Websites I've built</h2>
-      <p class="section-intro">Real products I designed and shipped — live for clients right now.</p>
+      <p class="section-intro">Real products I designed and shipped — live for clients right now. Scroll sideways to browse them all.</p>
     </div>
-    <div class="projects-grid">
-      <a class="project-card reveal" href="https://villa-pomona-bled.com" target="_blank" rel="noopener noreferrer">
+    <div class="projects-scroller">
+      <button class="projects-arrow prev" id="projPrev" type="button" aria-label="Previous project" aria-controls="projectsTrack">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <div class="projects-grid" id="projectsTrack" role="region" aria-label="Websites I've built — scroll sideways to browse" tabindex="0">
+      <a class="project-card reveal" href="https://villa-pomona-bled.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Villa Pomona Bled website (opens in a new tab)">
         <span class="proj-cat">Hotel · Bled</span>
         <h3>Villa Pomona Bled</h3>
         <p>Historic boutique hotel — booking-ready site with an AI concierge.</p>
         <span class="proj-link">villa-pomona-bled.com →</span>
       </a>
-      <a class="project-card reveal" href="https://maxisbled.com" target="_blank" rel="noopener noreferrer">
+      <a class="project-card reveal" href="https://maxisbled.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Maxis Penthouse website (opens in a new tab)">
         <span class="proj-cat">Real estate · Bled</span>
         <h3>Maxis Penthouse</h3>
         <p>Luxury penthouse showcase — clean, gallery-led, mobile-first.</p>
         <span class="proj-link">maxisbled.com →</span>
       </a>
-      <a class="project-card reveal" href="https://adorabreakfast.com/" target="_blank" rel="noopener noreferrer">
+      <a class="project-card reveal" href="https://adorabreakfast.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Adora Breakfast website (opens in a new tab)">
         <span class="proj-cat">Breakfast · Hospitality</span>
         <h3>Adora Breakfast</h3>
         <p>A warm, focused website for a breakfast destination.</p>
@@ -237,7 +266,18 @@
         <p>Handcrafted pebble flip-flops — a fresh online home for a brand that feels like walking on the beach.</p>
         <span class="proj-link">try.zakistar.com →</span>
       </a>
+      <a class="project-card reveal" href="https://book.adorabled.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Villa Adora Bled website (opens in a new tab)">
+        <span class="proj-cat">Hotel · Booking · Lake Bled</span>
+        <h3>Villa Adora Bled</h3>
+        <p>An 1878 lakeside villa turned luxury hotel — direct-booking site with live availability.</p>
+        <span class="proj-link">book.adorabled.com →</span>
+      </a>
+      </div>
+      <button class="projects-arrow next" id="projNext" type="button" aria-label="Next project" aria-controls="projectsTrack">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
+    <div class="projects-progress" id="projectsProgress" aria-hidden="true"><span id="projectsProgressBar"></span></div>
     <div class="projects-cta reveal">
       <p>Want a website like these? Let's build yours.</p>
       <a href="mailto:inquire@isakzvegelj.com?subject=Website%20project%20-%20Isak%20Zvegelj" class="btn btn-dark">Start a project</a>
@@ -256,14 +296,14 @@
       <div class="work-card reveal">
         <span class="work-icon">🚣</span>
         <h3>Become a sponsor</h3>
-        <p>Support me on my journey to excelence, on and off the water.</p>
+        <p>Support me on my journey to excellence, on and off the water.</p>
         <a class="work-btn mailto" data-email-user="sponsor" data-email-host="isakzvegelj.com" data-email-subject="Sponsorship proposal - Isak Zvegelj" href="mailto:sponsor@isakzvegelj.com?subject=Sponsorship%20proposal%20-%20Isak%20Zvegelj">Request sponsorship deck</a>
         <p class="work-sub">Support Isak on his rowing journey</p>
       </div>
       <div class="work-card reveal">
         <span class="work-icon">💻</span>
         <h3>Order a website</h3>
-        <p>Clean, fast, mobile-first websites and digital products — built with precision and same discipline, leveraging the lessons that elite rowing has given me. Hotels, clinics, artists, businesses, side projects. Let's talk about yours.</p>
+        <p>Clean, fast, mobile-first websites and digital products — built with precision and the same discipline that elite rowing has taught me. Hotels, clinics, artists, businesses, side projects. Let's talk about yours.</p>
         <a class="work-btn mailto" data-email-user="inquire" data-email-host="isakzvegelj.com" data-email-subject="Website project - Isak Zvegelj" href="mailto:inquire@isakzvegelj.com?subject=Website%20project%20-%20Isak%20Zvegelj">Start a project</a>
       </div>
     </div>
@@ -273,6 +313,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <!-- CONTACT -->
 <footer class="footer" id="contact">
@@ -303,22 +344,26 @@
       </div>
       <div class="footer-col footer-col-wide">
         <h4>Send a message</h4>
-        <form class="contact-form" id="contactForm" novalidate data-email-user="inquire" data-email-host="isakzvegelj.com">
+        <form class="contact-form" id="contactForm" data-email-user="inquire" data-email-host="isakzvegelj.com">
           <div class="cf-hp" aria-hidden="true">
             <label for="cfCompany">Company</label>
             <input type="text" id="cfCompany" name="company" tabindex="-1" autocomplete="off">
           </div>
           <div class="cf-row">
-            <input type="text" name="name" id="cfName" placeholder="Your name" required>
+            <label class="sr-only" for="cfName">Your name</label>
+            <input type="text" name="name" id="cfName" placeholder="Your name" autocomplete="name" required>
           </div>
           <div class="cf-row">
-            <input type="email" name="email" id="cfEmail" placeholder="Your email" required>
+            <label class="sr-only" for="cfEmail">Your email</label>
+            <input type="email" name="email" id="cfEmail" placeholder="Your email" autocomplete="email" required>
           </div>
           <div class="cf-row">
+            <label class="sr-only" for="cfMessage">Your message</label>
             <textarea name="message" id="cfMessage" rows="3" placeholder="Tell me about your project or idea…" required></textarea>
           </div>
           <button type="submit" class="btn btn-dark">Send via email</button>
-          <p class="cf-note">This opens your email app with the message pre-filled — no data is stored on the site.</p>
+          <p class="cf-error" id="cfError" role="alert" hidden></p>
+           <p class="cf-note">This opens your email app with the message pre-filled — no data is stored on the site.</p>
         </form>
       </div>
     </div>
@@ -329,6 +374,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=quality-pass-1"></script>
+<script src="js/main.js?v=projects-rail-1" defer></script>
 </body>
 </html>

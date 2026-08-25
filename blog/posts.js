@@ -1,12 +1,10 @@
 /* ============================================================
    Blog posts — isakzvegelj.com/blog
    ------------------------------------------------------------
-   TO ADD A NEW POST:
-   1. Copy the TEMPLATE block below.
-   2. Paste it just above the closing "];" (make sure you add
-      a comma after the previous entry, if any).
-   3. Fill in each field. Then commit + push — that's it.
-      No other file needs editing.
+   Add posts with `python3 blog/publish.py` from the repository
+   root. The tool creates this entry, a static article page, and
+   the sitemap entry together. The template below documents the
+   data shape for legacy/manual maintenance.
    ============================================================ */
 
 window.BLOG_POSTS = [
@@ -14,6 +12,7 @@ window.BLOG_POSTS = [
   /* ---------- TEMPLATE (copy me) ----------
   {
     id: "slug-for-the-url",            // unique, lowercase, dashes
+    url: "slug-for-the-url.html",       // publisher-created; omit without a matching static page
     title: "Your post title",
     date: "2026-08-03",                // YYYY-MM-DD
     tag: "Update",                     // e.g. Update, Racing, Building

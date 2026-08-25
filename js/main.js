@@ -9,12 +9,39 @@
   backToTop.setAttribute('aria-label', 'Back to top');
   backToTop.innerHTML = '&#8593;';
   document.body.appendChild(backToTop);
-  function updateBackToTop() { backToTop.classList.toggle('visible', window.scrollY > 300); }
-  window.addEventListener('scroll', updateBackToTop, { passive: true });
   backToTop.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
   });
-  updateBackToTop();
+  /* Header state + back-to-top visibility — one rAF-coalesced scroll handler.
+     Class writes happen at most once per frame and only when the state actually
+     changes, so momentum-scrolling (especially flicking back up on phones)
+     never queues redundant style invalidation behind the scroll gesture. */
+  var header = document.getElementById('siteHeader');
+  var headerScrolled = false;
+  var backToTopVisible = false;
+  var scrollTicking = false;
+  function applyScrollState() {
+    scrollTicking = false;
+    var y = window.scrollY || 0;
+    var shouldShrinkHeader = y > 40;
+    if (header && shouldShrinkHeader !== headerScrolled) {
+      headerScrolled = shouldShrinkHeader;
+      header.classList.toggle('scrolled', shouldShrinkHeader);
+    }
+    var shouldShowTop = y > 300;
+    if (shouldShowTop !== backToTopVisible) {
+      backToTopVisible = shouldShowTop;
+      backToTop.classList.toggle('visible', shouldShowTop);
+    }
+  }
+  window.addEventListener('scroll', function () {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(applyScrollState);
+    }
+  }, { passive: true });
+  applyScrollState();
 
   /* ---- Dark mode ---- */
   var root = document.documentElement;
@@ -22,8 +49,15 @@
   try { stored = localStorage.getItem('theme'); } catch (e) {}
   var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   function applyTheme(theme) {
-    if (theme === 'dark') root.setAttribute('data-theme', 'dark');
+    var dark = theme === 'dark';
+    if (dark) root.setAttribute('data-theme', 'dark');
     else root.removeAttribute('data-theme');
+    var toggle = document.getElementById('themeToggle');
+    if (toggle) {
+      toggle.setAttribute('aria-pressed', dark ? 'true' : 'false');
+      toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      toggle.setAttribute('title', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
   }
   applyTheme(stored || (systemDark ? 'dark' : 'light'));
   var themeToggle = document.getElementById('themeToggle');
@@ -50,19 +84,11 @@
     });
   }
 
-  /* Header: add .scrolled past 40px */
-  var header = document.getElementById('siteHeader');
-  function onScroll() {
-    if (window.scrollY > 40) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
   /* Mobile nav toggle */
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
   var lockedScrollY = 0;
+  var lastFocusedElement = null;
   function lockPageScroll() {
     lockedScrollY = window.scrollY || window.pageYOffset || 0;
     document.documentElement.classList.add('menu-open');
@@ -79,23 +105,111 @@
     document.body.style.width = '';
     window.scrollTo(0, lockedScrollY);
   }
-  function closeNav() {
+  function closeNav(restoreFocus) {
     links.classList.remove('open');
     toggle.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
     unlockPageScroll();
+    if (restoreFocus && lastFocusedElement) lastFocusedElement.focus();
+  }
+  function openNav() {
+    lastFocusedElement = document.activeElement;
+    links.classList.add('open');
+    toggle.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    lockPageScroll();
+    var firstLink = links.querySelector('a');
+    if (firstLink) firstLink.focus();
   }
   toggle.addEventListener('click', function () {
-    var open = links.classList.toggle('open');
-    toggle.classList.toggle('open', open);
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (open) lockPageScroll();
-    else unlockPageScroll();
+    if (links.classList.contains('open')) closeNav();
+    else openNav();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!links.classList.contains('open')) return;
+    if (e.key === 'Escape') {
+      closeNav(true);
+      return;
+    }
+    if (e.key !== 'Tab') return;
+    var focusable = links.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   });
   /* close nav when a link is tapped */
   Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
-    a.addEventListener('click', closeNav);
+    a.addEventListener('click', function () { closeNav(false); });
   });
+
+  /* Pause the results marquee on request. */
+  var marquee = document.querySelector('.results-marquee');
+  var marqueeToggle = document.querySelector('.marquee-toggle');
+  if (marquee && marqueeToggle) {
+    marqueeToggle.addEventListener('click', function () {
+      var paused = marquee.classList.toggle('paused');
+      marqueeToggle.setAttribute('aria-pressed', paused ? 'true' : 'false');
+      marqueeToggle.textContent = paused ? 'Resume motion' : 'Pause motion';
+    });
+  }
+
+  /* Projects rail: left-to-right scrolling row of project cards.
+     Arrows step one card at a time; the gold progress bar mirrors the
+     scroll position; ArrowLeft/ArrowRight work while the rail is focused. */
+  (function () {
+    var track = document.getElementById('projectsTrack');
+    var prev = document.getElementById('projPrev');
+    var next = document.getElementById('projNext');
+    var progWrap = document.getElementById('projectsProgress');
+    var bar = document.getElementById('projectsProgressBar');
+    if (!track) return;
+    function reducedMotion() {
+      return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    function step() {
+      var card = track.querySelector('.project-card');
+      if (!card) return 340;
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 24;
+      return card.getBoundingClientRect().width + gap;
+    }
+    function go(dir) {
+      track.scrollBy({ left: dir * step(), behavior: reducedMotion() ? 'auto' : 'smooth' });
+    }
+    if (prev) prev.addEventListener('click', function () { go(-1); });
+    if (next) next.addEventListener('click', function () { go(1); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+    });
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var max = track.scrollWidth - track.clientWidth;
+      var overflow = max > 4;
+      if (prev) prev.disabled = !overflow || track.scrollLeft <= 2;
+      if (next) next.disabled = !overflow || track.scrollLeft >= max - 2;
+      if (!progWrap) return;
+      progWrap.classList.toggle('hidden', !overflow);
+      if (overflow && bar) {
+        var visibleFrac = track.clientWidth / track.scrollWidth;
+        bar.style.width = (visibleFrac * 100) + '%';
+        var ratio = max > 0 ? track.scrollLeft / max : 0;
+        bar.style.transform = 'translateX(' + (ratio * track.clientWidth * (1 - visibleFrac)) + 'px)';
+      }
+    }
+    track.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
 
   /* Scroll reveal */
   var revealEls = document.querySelectorAll('.reveal');
@@ -146,6 +260,12 @@
   if (cf) {
     cf.addEventListener('submit', function (e) {
       e.preventDefault();
+      var error = document.getElementById('cfError');
+      if (error) { error.hidden = true; error.textContent = ''; }
+      if (!cf.checkValidity()) {
+        cf.reportValidity();
+        return;
+      }
       /* honeypot: a real user never fills the hidden 'company' field */
       var hp = document.getElementById('cfCompany');
       if (hp && hp.value && String(hp.value).trim() !== '') {
@@ -154,11 +274,14 @@
       var name = (document.getElementById('cfName').value || '').trim();
       var email = (document.getElementById('cfEmail').value || '').trim();
       var msg = (document.getElementById('cfMessage').value || '').trim();
-      if (!name || !email || !msg) {
-        alert('Please fill in your name, email and message first.');
+      if (!name || !email || !msg || !document.getElementById('cfEmail').checkValidity()) {
+        if (error) {
+          error.hidden = false;
+          error.textContent = 'Please enter your name, a valid email address and a message.';
+        }
         return;
       }
-      var subject = 'New message from ' + name + ' (via isakzvegelj.github.io)';
+      var subject = 'New message from ' + name + ' (via isakzvegelj.com)';
       var body = 'Hi Isak,\n\n' + msg + '\n\n— ' + name + '\n' + email + '\n';
       var to = emailFor(cf) || (cf.getAttribute('data-email-user') + '@' + cf.getAttribute('data-email-host'));
       var href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
