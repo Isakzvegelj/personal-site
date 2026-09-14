@@ -101,7 +101,6 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
       <a href="#creator">Creator</a>
       <a href="#on-the-water">On the water</a>
       <a href="#projects">Projects</a>
-      <a href="blog/" >Blog</a>
       <a href="#work">Work with me</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -126,7 +125,7 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
     <p class="hero-sub">World-class athlete from Slovenia.<br></p>
     <div class="hero-actions">
       <a href="#results" class="btn btn-light">My Results</a>
-      <a href="mailto:inquire@isakzvegelj.com?subject=Website%20project%20-%20Isak%20Zvegelj" class="btn btn-ghost">Work With Me</a>
+      <a href="#work" class="btn btn-ghost">Work With Me</a>
     </div>
   </div>
   <a class="scroll-cue" href="#about" aria-label="Scroll down"><span></span></a>
@@ -169,7 +168,7 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
       <p class="section-intro"></p>
     </div>
 
-    <div class="results-marquee reveal" role="region" aria-labelledby="results-heading">
+    <div class="results-marquee reveal" role="region" aria-labelledby="results-heading" tabindex="0">
        <button class="marquee-toggle" type="button" aria-pressed="false">Pause motion</button>
       <div class="results-marquee-track">
         <div class="results-marquee-set">
@@ -197,14 +196,6 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
 <!-- CREATOR -->
 <section class="section creator" id="creator">
   <div class="container">
-    <div class="creator-head reveal">
-      <p class="eyebrow">Beyond the boat</p>
-      <h2 class="section-title">More than an athlete.<br>I am a creator.</h2>
-    </div>
-    <div class="creator-story reveal">
-      <p></p>
-      <p></p>
-    </div>
     <div class="rowing-video reveal" id="on-the-water">
       <div class="rowing-video-copy">
         <p class="eyebrow">On the water</p>
@@ -220,6 +211,10 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
       <figure><img src="assets/img/actionA.webp" srcset="assets/img/responsive/actionA-640.webp 640w, assets/img/actionA.webp 1600w" sizes="(max-width: 520px) 300px, (max-width: 860px) 80vw, 360px" width="1600" height="1066" loading="lazy" decoding="async" alt="Isak at the 2026 World Rowing Cup in Lucerne"><figcaption>World Rowing Cup III · Lucerne 2026</figcaption></figure>
       <figure><img src="assets/img/actionB.webp" srcset="assets/img/responsive/actionB-640.webp 640w, assets/img/actionB.webp 1600w" sizes="(max-width: 520px) 300px, (max-width: 860px) 80vw, 360px" width="1600" height="1066" loading="lazy" decoding="async" alt="Isak (bow) racing the men's pair at the 2026 World Rowing Cup in Seville"><figcaption>Men's Pair · Seville 2026</figcaption></figure>
       <figure><img src="assets/img/slo-pair-press.webp" srcset="assets/img/responsive/slo-pair-press-640.webp 640w, assets/img/slo-pair-press.webp 2000w" sizes="(max-width: 520px) 300px, (max-width: 860px) 80vw, 360px" width="2000" height="1333" loading="lazy" decoding="async" alt="Isak (right) with his pair partner at Team Slovenia press day"><figcaption>With my pair partner · Team Slovenia</figcaption></figure>
+    </div>
+    <div class="creator-head reveal">
+      <p class="eyebrow">Beyond the boat</p>
+      <h2 class="section-title">More than an athlete.<br>I am a creator.</h2>
     </div>
   </div>
 </section>
@@ -306,6 +301,27 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
       <p>Prefer to email directly? </p>
       <a class="btn btn-dark mailto mailto-self" data-email-user="inquire" data-email-host="isakzvegelj.com" href="mailto:inquire@isakzvegelj.com">[email]</a>
     </div>
+  </div>
+</section>
+
+<!-- RISED CREATIVITY -->
+<section class="section creator" id="rised-creativity">
+  <div class="container">
+    <article class="rised-card reveal">
+      <div class="rised-card-main">
+        <p class="eyebrow">Rised Creativity</p>
+        <h3>My Brand</h3>
+        <p><strong>Rised Creativity</strong> is my LEGO invention and entertainment brand: original builds, clever mechanisms, and satisfying ideas turned into videos people want to share. It is where engineering, storytelling, and play meet.</p>
+        <p class="rised-card-note">From the first sketch to the final upload, I build the concept, prototype the mechanism, and shape the story.</p>
+      </div>
+      <div class="rised-card-side">
+        <div class="rised-metrics" aria-label="Rised Creativity audience metrics">
+          <div><strong>10k+</strong><span>YouTube subscribers</span></div>
+          <div><strong>4m+</strong><span>total views</span></div>
+        </div>
+        <a class="video-link" href="https://youtube.com/@RisedCreativity" target="_blank" rel="noopener noreferrer">Explore Rised Creativity <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
   </div>
 </section>
 </main>

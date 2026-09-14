@@ -74,7 +74,11 @@
   }
   positionThemeToggle();
   if (window.matchMedia) {
-    window.matchMedia('(max-width: 860px)').addEventListener('change', positionThemeToggle);
+    var navBreakpoint = window.matchMedia('(max-width: 860px)');
+    navBreakpoint.addEventListener('change', function () {
+      positionThemeToggle();
+      if (!navBreakpoint.matches && links && links.classList.contains('open')) closeNav(false);
+    });
   }
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
