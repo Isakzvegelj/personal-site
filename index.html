@@ -30,8 +30,10 @@
       "name": "Isak Žvegelj",
       "url": "https://isakzvegelj.com/",
       "image": "https://isakzvegelj.com/assets/img/profile.webp",
-      "description": "Isak Žvegelj is a Slovenian Olympic rower, world-record holder.",
-      "jobTitle": "Olympic rower",
+      "description": "Isak Žvegelj is a Slovenian Olympic rower, world-record holder and website builder.",
+      "jobTitle": "Olympic rower and website builder",
+      "nationality": {"@type": "Country", "name": "Slovenia"},
+      "alumniOf": {"@type": "CollegeOrUniversity", "name": "University of Pennsylvania"},
       "knowsAbout": [
         "rowing",
         "indoor rowing",
@@ -55,25 +57,6 @@
 <meta name="twitter:description" content="Olympic rower, world-record holder from Slovenia.">
 <meta name="twitter:image" content="https://isakzvegelj.com/assets/img/social-share.jpg">
 <meta name="twitter:image:alt" content="Isak Žvegelj rowing for Slovenia on the water">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Isak Žvegelj",
-  "url": "https://isakzvegelj.com/",
-  "image": "https://isakzvegelj.com/assets/img/social-share.jpg",
-  "jobTitle": "Website builder",
-  "description": "Slovenian Olympic rower (Paris 2024), world-record holder and computational cognitive science graduate from the University of Pennsylvania.",
-  "nationality": {"@type": "Country", "name": "Slovenia"},
-  "alumniOf": {"@type": "CollegeOrUniversity", "name": "University of Pennsylvania"},
-  "sameAs": [
-    "https://instagram.com/isakzvegelj",
-    "https://linkedin.com/in/isak-zvegelj",
-    "https://github.com/Isakzvegelj"
-  ],
-  "knowsAbout": ["Rowing", "Web development", "Cognitive science"]
-}
-</script>
 <link rel="preload" as="image" href="assets/img/hero.webp" imagesrcset="assets/img/responsive/hero-960.webp 960w, assets/img/responsive/hero-1600.webp 1600w, assets/img/responsive/hero-2400.webp 2400w, assets/img/hero.webp 2880w, assets/img/hero-3840.webp 3840w" imagesizes="100vw" fetchpriority="high">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="alternate icon" href="assets/apple-touch-icon.png">
@@ -83,7 +66,7 @@
 <link rel="preconnect" href="https://static.cloudflareinsights.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="css/site.css?v=projects-rail-1">
+<link rel="stylesheet" href="css/site.css?v=media-center-1">
 <script>
 document.documentElement.classList.add('js');(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
 </script>
@@ -122,7 +105,7 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
   <div class="container hero-content">
     <p class="hero-kicker">Slovenian Olympic Rower</p>
     <h1 class="hero-title">Isak Žvegelj</h1>
-    <p class="hero-sub">World-class athlete from Slovenia.<br></p>
+    <p class="hero-sub">World-class athlete from Slovenia.</p>
     <div class="hero-actions">
       <a href="#results" class="btn btn-light">My Results</a>
       <a href="#work" class="btn btn-ghost">Work With Me</a>
@@ -134,12 +117,13 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
 <!-- ABOUT -->
 <section class="section" id="about">
   <div class="container about-grid">
-    <div class="about-media reveal">
+    <div class="about-media reveal" id="aboutPortrait" aria-hidden="false">
       <img src="assets/img/profile.webp" srcset="assets/img/responsive/profile-480.webp 480w, assets/img/profile.webp 1152w" sizes="220px" width="1152" height="1440" loading="lazy" decoding="async" alt="Portrait of Isak Žvegelj">
     </div>
     <div class="about-text reveal">
-      <p class="eyebrow">About</p>
-      <h2 class="section-title">Isak<br></h2>
+      <button class="about-trigger" id="aboutTrigger" type="button" aria-expanded="false" aria-controls="aboutPortrait">
+        <span class="eyebrow">About</span>
+      </button>
       <p>I grew up in Bled, Slovenia. Have been rowing since 2014. I rowed Slovenia's <strong>men's single scull at the Paris 2024 Olympics</strong>, reached an A-final at a World Cup, finished 7th at the European Championships, and hold a <strong>world record</strong> on the indoor rower.</p>
       <p>In 2025 I completed a degree from <strong>computational cognitive science at the University of Pennsylvania</strong>. </p>
       <div class="stats-row">
@@ -160,12 +144,11 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
 </section>
 
 <!-- RESULTS -->
-<section class="section alt" id="results">
+<section class="section alt results-section" id="results">
   <div class="container">
     <div class="section-head reveal">
       <p class="eyebrow">Results</p>
       <h2 class="section-title" id="results-heading">Recent results & career highs</h2>
-      <p class="section-intro"></p>
     </div>
 
     <div class="results-marquee reveal" role="region" aria-labelledby="results-heading" tabindex="0">
@@ -196,10 +179,13 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
 <!-- CREATOR -->
 <section class="section creator" id="creator">
   <div class="container">
+    <div class="section-head media-head reveal">
+      <p class="eyebrow">Media</p>
+      <h2 class="section-title">On the water</h2>
+      <p class="section-intro">A glimpse from the boat, the start line, and beyond.</p>
+    </div>
     <div class="rowing-video reveal" id="on-the-water">
       <div class="rowing-video-copy">
-        <p class="eyebrow">On the water</p>
-        <h3></h3>
         <p>A glimpse from the boat.</p>
         <a class="video-link" href="https://www.youtube.com/watch?v=oYZVvwUoSAQ&amp;t=76s" target="_blank" rel="noopener noreferrer">Watch the full video <span aria-hidden="true">↗</span></a>
       </div>
@@ -288,7 +274,6 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
         <h3>Become a sponsor</h3>
         <p>Support me on my journey to excellence, on and off the water.</p>
         <a class="work-btn mailto" data-email-user="sponsor" data-email-host="isakzvegelj.com" data-email-subject="Sponsorship proposal - Isak Zvegelj" href="mailto:sponsor@isakzvegelj.com?subject=Sponsorship%20proposal%20-%20Isak%20Zvegelj">Request sponsorship deck</a>
-        <p class="work-sub"></p>
       </div>
       <div class="work-card reveal">
         <span class="work-icon">💻</span>
@@ -385,6 +370,6 @@ document.documentElement.classList.add('js');(function(){try{var t=localStorage.
   </div>
 </footer>
 
-<script src="js/main.js?v=projects-rail-1" defer></script>
+<script src="js/main.js?v=media-center-1" defer></script>
 </body>
 </html>

@@ -43,6 +43,26 @@
   }, { passive: true });
   applyScrollState();
 
+  /* Mobile About portrait: keep the portrait tucked away until requested. */
+  var aboutTrigger = document.getElementById('aboutTrigger');
+  var aboutPortrait = document.getElementById('aboutPortrait');
+  if (aboutTrigger && aboutPortrait) {
+    function setPortraitVisible(visible) {
+      var shown = visible;
+      aboutPortrait.classList.toggle('about-visible', shown);
+      aboutPortrait.setAttribute('aria-hidden', shown ? 'false' : 'true');
+      aboutTrigger.setAttribute('aria-expanded', shown ? 'true' : 'false');
+    }
+    setPortraitVisible(false);
+    aboutTrigger.addEventListener('click', function () {
+      var shown = aboutPortrait.classList.contains('about-visible');
+      setPortraitVisible(!shown);
+    });
+    window.addEventListener('resize', function () {
+      setPortraitVisible(aboutPortrait.classList.contains('about-visible'));
+    });
+  }
+
   /* ---- Dark mode ---- */
   var root = document.documentElement;
   var stored = null;

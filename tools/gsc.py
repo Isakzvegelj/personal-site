@@ -17,7 +17,10 @@ Usage:
 Service-account JSON must have Search Console API enabled in its project and
 the service-account email added as an Owner in Search Console.
 """
-import base64, json, os, subprocess, sys, tempfile, time, urllib.request, urllib.error
+import base64, json, os, subprocess, sys, tempfile, time
+import urllib.error
+import urllib.parse
+import urllib.request
 
 SB_SCOPE = "https://www.googleapis.com/auth/webmasters"
 TOKEN_URL = "https://oauth2.googleapis.com/token"

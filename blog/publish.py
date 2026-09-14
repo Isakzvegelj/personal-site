@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Isak's blog publish tool — type an article, hit Publish, it's live.
+"""Isak's blog generator — type an article, generate it locally, then review.
 
 Run from the repository root:  python3 blog/publish.py
 Then open the printed URL in your browser.
 
 The page lets you paste a title + article (plain text or light markdown),
-click Publish, and it:
+click Generate, and it:
   1. converts your text to safe HTML
   2. creates a static, SEO-friendly blog/<slug>.html page
   3. appends the page to blog/posts.js and the sitemap
-  4. commits and pushes the generated files to GitHub (main).
+  4. leaves generated files local for review; deployment is a separate Git operation.
 
 Stdlib only. No installs.
 """
@@ -21,7 +21,6 @@ import json
 import os
 import re
 import secrets
-import subprocess
 import sys
 import urllib.parse
 import webbrowser
@@ -164,6 +163,14 @@ def sitemap_date(value):
         return datetime.date.fromisoformat(value).isoformat()
     except (TypeError, ValueError):
         return datetime.date.today().isoformat()
+
+
+def validate_date(value):
+    """Reject invalid dates instead of silently changing sitemap metadata."""
+    try:
+        return datetime.date.fromisoformat(value).isoformat()
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Date must use YYYY-MM-DD.") from exc
 
 
 def make_entry(title, tag, date, excerpt, content_html, post_id=None):
@@ -378,24 +385,9 @@ def save_post_files(title, tag, date, excerpt, content_html, post_id, published)
     return destination
 
 
-def git(cmd):
-    return subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
-
-def publish(post_id):
-    generated_files = ["blog/posts.js", f"blog/{post_filename(post_id)}", "sitemap.xml"]
-    added = git(["git", "add", *generated_files])
-    if added.returncode != 0:
-        return False, "git add failed: " + added.stderr.strip()
-    committed = git(["git", "commit", "-m", f"Add blog post: {post_id}", "--", *generated_files])
-    if committed.returncode != 0:
-        return False, "git commit failed: " + committed.stderr.strip()
-    pull = git(["git", "pull", "--rebase", "origin", "main"])
-    if pull.returncode != 0:
-        return False, "git pull failed: " + pull.stderr.strip()
-    push = git(["git", "push", "origin", "main"])
-    if push.returncode != 0:
-        return False, "git push failed: " + push.stderr.strip()
-    return True, ""
+def generated_files(post_id):
+    """Return the files a release would contain, without touching Git."""
+    return ["blog/posts.js", f"blog/{post_filename(post_id)}", "sitemap.xml"]
 
 # ---------------------------------------------------------------- http server
 PAGE = """<!DOCTYPE html>
@@ -425,7 +417,7 @@ textarea{resize:vertical;white-space:pre-wrap}
 </style></head>
 <body><div class="wrap">
 <h1>New blog post</h1>
-<p class="sub">Write it, click <strong>Publish</strong> — it goes live on isakzvegelj.com/blog.</p>
+<p class="sub">Write it, click <strong>Generate</strong> — then review the local files before release.</p>
 <form id="form">
   <input type="hidden" name="csrf_token" value="__CSRF_TOKEN__">
   <label>Title</label>
@@ -446,7 +438,7 @@ textarea{resize:vertical;white-space:pre-wrap}
     <div>
       <label>Status</label>
       <select id="mode" name="mode" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--white);font-size:1rem">
-        <option value="publish">Publish live</option>
+        <option value="publish">Generate for release</option>
         <option value="draft">Save draft only</option>
       </select>
     </div>
@@ -455,10 +447,10 @@ textarea{resize:vertical;white-space:pre-wrap}
   <label>Article (plain text or light markdown)</label>
   <textarea id="content" name="content" rows="14" placeholder="Write your post here.&#10;&#10;## A heading&#10;&#10;Some paragraph text. **bold** and *italic* work.&#10;&#10;- bullet one&#10;- bullet two&#10;&#10;![caption](https://example.com/photo.jpg)"></textarea>
 
-  <button type="submit" class="btn">Publish</button>
+  <button type="submit" class="btn">Generate</button>
   <span id="status"></span>
 </form>
-<p class="hint" style="margin-top:26px">Markdown you can use: <code>## heading</code>, <code>**bold**</code>, <code>*italic*</code>, <code>- bullet</code>, blank line = new paragraph, <code>![alt](url)</code> = image. Or just paste plain text and hit Publish.</p>
+<p class="hint" style="margin-top:26px">Markdown you can use: <code>## heading</code>, <code>**bold**</code>, <code>*italic*</code>, <code>- bullet</code>, blank line = new paragraph, <code>![alt](url)</code> = image. Or just paste plain text and hit Generate.</p>
 </div>
 <script>
 (function(){
@@ -470,16 +462,16 @@ textarea{resize:vertical;white-space:pre-wrap}
     var fd = new FormData(f);
     st.className = ''; st.style.display = 'none';
     var btn = f.querySelector('.btn');
-    btn.disabled = true; btn.textContent = 'Publishing…';
+    btn.disabled = true; btn.textContent = 'Generating…';
     fetch('/publish', {method:'POST', body:new URLSearchParams(fd)})
       .then(function(r){return r.json();})
       .then(function(d){
-        btn.disabled=false; btn.textContent='Publish';
+        btn.disabled=false; btn.textContent='Generate';
         st.className = d.ok ? 'ok' : 'err';
         st.textContent = d.message;
       })
       .catch(function(err){
-        btn.disabled=false; btn.textContent='Publish';
+        btn.disabled=false; btn.textContent='Generate';
         st.className='err'; st.textContent='Something went wrong: '+err;
       });
   });
@@ -534,6 +526,11 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._send(200, json.dumps({"ok": False, "message": "Please add a title."})); return
         if not content:
             self._send(200, json.dumps({"ok": False, "message": "The article is empty."})); return
+        try:
+            date = validate_date(date)
+        except ValueError as exc:
+            self._send(400, json.dumps({"ok": False, "message": str(exc)}), "application/json; charset=utf-8")
+            return
         if mode not in ("publish", "draft"):
             self._send(400, json.dumps({"ok": False, "message": "invalid publish mode"}), "application/json; charset=utf-8")
             return
@@ -546,17 +543,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._send(409, json.dumps({"ok": False, "message": str(exc)}), "application/json; charset=utf-8")
             return
 
+        files = ", ".join(generated_files(post_id))
         if mode == "draft":
             self._send(200, json.dumps({"ok": True, "message":
-                f"Saved blog/{post_filename(post_id)} and posts.js as a local draft (not pushed)."}))
+                f"Saved blog/{post_filename(post_id)} and posts.js as a local draft (not released)."}))
             return
 
-        ok, err = publish(post_id)
-        if ok:
-            self._send(200, json.dumps({"ok": True, "message":
-                "Published! It's live at " + canonical_post_url(post_id) + " (appears within ~1 min)."}))
-        else:
-            self._send(200, json.dumps({"ok": False, "message": err}))
+        self._send(200, json.dumps({"ok": True, "message":
+            f"Generated locally for review: {files}. Nothing was committed or pushed."}))
 
     def log_message(self, format, *args):
         pass

@@ -9,7 +9,6 @@ import urllib.error
 import urllib.request
 from contextlib import ExitStack
 from pathlib import Path
-from types import SimpleNamespace
 from unittest.mock import patch
 
 import publish
@@ -51,6 +50,11 @@ class PublishSafetyTests(unittest.TestCase):
             with patch.object(publish, "POSTS_FILE", str(posts)):
                 with self.assertRaisesRegex(ValueError, "same-title"):
                     publish.ensure_unique_slug("Same Title")
+
+    def test_date_validation_rejects_silent_sitemap_fallbacks(self):
+        self.assertEqual(publish.validate_date("2026-08-19"), "2026-08-19")
+        with self.assertRaisesRegex(ValueError, "YYYY-MM-DD"):
+            publish.validate_date("not-a-date")
 
     def test_entry_has_safe_static_url_and_rejects_traversal(self):
         entry = publish.make_entry("Example", "Update", "2026-08-19", "Summary", "<p>Body</p>", "example-title")
@@ -126,19 +130,12 @@ class PublishSafetyTests(unittest.TestCase):
                 publish.write_post_page("existing-page", "replacement")
             self.assertEqual(target.read_text(encoding="utf-8"), "keep me")
 
-    def test_publish_stages_only_generated_files(self):
-        success = SimpleNamespace(returncode=0, stderr="")
-        with patch.object(publish, "git", return_value=success) as mocked:
-            ok, error = publish.publish("new-post")
-        self.assertTrue(ok)
-        self.assertEqual(error, "")
-        first_command = mocked.call_args_list[0].args[0]
+    def test_generated_files_are_local_only(self):
         self.assertEqual(
-            first_command,
-            ["git", "add", "blog/posts.js", "blog/new-post.html", "sitemap.xml"],
+            publish.generated_files("new-post"),
+            ["blog/posts.js", "blog/new-post.html", "sitemap.xml"],
         )
-        commit_command = mocked.call_args_list[1].args[0]
-        self.assertEqual(commit_command[-4:], ["--", "blog/posts.js", "blog/new-post.html", "sitemap.xml"])
+        self.assertFalse(hasattr(publish, "git"))
 
     def test_blog_index_prefers_safe_static_url_with_legacy_fallback(self):
         source = (Path(publish.BASE) / "index.html").read_text(encoding="utf-8")

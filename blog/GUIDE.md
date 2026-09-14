@@ -1,8 +1,8 @@
 # How to make a blog post — isakzvegelj.com/blog
 
 The absolute easiest way: use the **publish tool**. You type a title and
-your article into a simple page, click **Publish**, and it goes live —
-no HTML, no git, no terminal needed.
+your article into a simple page, click **Generate**, and it creates the
+reviewable static files locally — no HTML required.
 
 ---
 
@@ -21,12 +21,12 @@ no HTML, no git, no terminal needed.
    - **Short description** — optional search/social summary; generated automatically if blank.
    - **Date** — defaults to today.
    - **Tag** — optional small label (Update, Racing, Building…).
-   - **Status** — *Publish live* (recommended) or *Save draft only*.
+   - **Status** — *Generate for release* or *Save draft only*.
    - **Article** — type or paste plain text. No HTML needed.
 
-3. Click **Publish**. It creates a static article page with search/social
-   metadata, updates the blog list and sitemap, commits only those generated
-   files, and pushes them to GitHub. The article should be live within about a minute.
+3. Click **Generate**. It creates a static article page with search/social
+   metadata, updates the blog list and sitemap, and leaves all generated files
+   local for review. Nothing is committed or pushed automatically.
 
 You can even hand me a pure-text draft and I'll drop it in for you.
 But with this tool you never have to ask.
@@ -134,14 +134,14 @@ Preview locally before publishing:
 Then open http://localhost:8877/blog/ in your browser. Click your post to
 see the full article. Hit Ctrl+C when done.
 
-### Step 6 — Publish
+### Step 6 — Release after review
 
     cd /path/to/personal-site
-    git add blog/posts.js
+    git add blog/posts.js blog/<slug>.html sitemap.xml
     git commit -m "Add blog post: <your title>"
     git push origin main
 
-Wait about a minute, then check https://isakzvegelj.com/blog/
+Only run these commands after reviewing the local preview and diff. The push is the production deployment. Wait about a minute, then check https://isakzvegelj.com/blog/
 
 ---
 
