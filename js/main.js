@@ -2,6 +2,12 @@
 (function () {
   'use strict';
 
+  /* A transform-only reading indicator shares the existing scroll frame. */
+  var readingProgress = document.createElement('div');
+  readingProgress.className = 'reading-progress';
+  readingProgress.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(readingProgress);
+
   /* Mobile back-to-top control */
   var backToTop = document.createElement('button');
   backToTop.className = 'back-to-top';
@@ -24,6 +30,8 @@
   function applyScrollState() {
     scrollTicking = false;
     var y = window.scrollY || 0;
+    var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    readingProgress.style.transform = "scaleX(" + (scrollable > 0 ? Math.min(1, Math.max(0, y / scrollable)) : 0) + ")";
     var shouldShrinkHeader = y > 40;
     if (header && shouldShrinkHeader !== headerScrolled) {
       headerScrolled = shouldShrinkHeader;
@@ -236,7 +244,17 @@
   })();
 
   /* Scroll reveal */
+  document.querySelectorAll('.stat, .creator-gallery figure, .footer-col').forEach(function (el) {
+    el.classList.add('reveal');
+  });
   var revealEls = document.querySelectorAll('.reveal');
+  revealEls.forEach(function (el) {
+    var siblings = Array.prototype.filter.call(el.parentNode.children, function (child) {
+      return child.classList.contains('reveal');
+    });
+    var index = siblings.indexOf(el);
+    el.style.setProperty('--reveal-delay', Math.min(3, Math.max(0, index)) * 85 + 'ms');
+  });
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
