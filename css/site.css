@@ -630,3 +630,27 @@ html.js .reveal{transition:opacity .8s var(--ease-out),transform .8s var(--ease-
 }
 
 @media(prefers-reduced-motion:reduce){html.js .work-card.reveal.visible:hover{transform:none;}}
+
+/* Photograph first: keep all introductory copy below the boat. */
+.hero{display:block;min-height:0;background:var(--bg);color:var(--ink);overflow:visible;}
+.hero-photo{position:relative;height:min(78svh,900px);min-height:420px;overflow:hidden;}
+.hero-photo .hero-media{object-position:50% 50%;}
+.hero-overlay{background:linear-gradient(180deg,rgba(14,30,36,.25),transparent 30%);pointer-events:none;}
+.hero-content{position:relative;inset:auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:40px;padding:42px 0 48px;text-align:left;color:var(--ink);}
+.hero-kicker{position:static;inset:auto;margin:0 0 12px;transform:none;text-align:left;color:var(--gold);font-size:.67rem;letter-spacing:.22em;}
+.hero-title{position:static;width:auto;height:auto;margin:0;padding:0;overflow:visible;clip:auto;white-space:normal;border:0;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:500;line-height:1.04;letter-spacing:-.02em;text-shadow:none;}
+.hero-sub{position:static;inset:auto;max-width:none;margin:14px 0 0;font-size:.95rem;font-weight:400;line-height:1.75;color:var(--muted);}
+.hero-actions{position:static;inset:auto;transform:none;width:auto;display:flex;align-items:center;gap:12px;margin:0;}
+.hero-actions .btn{width:auto;min-height:46px;padding:12px 22px;font-size:.8rem;white-space:nowrap;}
+.hero-actions .btn-light{background:var(--green);color:var(--white);border:1px solid var(--green);}
+.hero-actions .btn-ghost{border:1px solid var(--line);color:var(--ink);background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;}
+.hero-actions .btn:hover{border-color:var(--gold);}
+@media(max-width:860px){
+ .hero-photo{height:62svh;min-height:350px;max-height:640px;}
+ .hero-content{grid-template-columns:1fr;gap:26px;padding:34px 0 40px;}
+ .hero-actions{justify-content:flex-start;flex-wrap:wrap;gap:10px;}
+ .hero-actions .btn{min-height:44px;padding:11px 18px;}
+ .hero-title{font-size:3rem;}
+ .hero-sub{font-size:.9rem;}
+}
+@media(max-width:360px){.hero-actions .btn{font-size:.74rem;padding:11px 14px;}}
