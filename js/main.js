@@ -94,7 +94,7 @@
   var desktopThemeParent = themeToggle ? themeToggle.parentNode : null;
   function positionThemeToggle() {
     if (!themeToggle || !navLinksForTheme || !desktopThemeParent) return;
-    if (window.matchMedia('(max-width: 860px)').matches) {
+    if (window.matchMedia('(max-width: 980px)').matches) {
       navLinksForTheme.appendChild(themeToggle);
     } else if (themeToggle.parentNode !== desktopThemeParent) {
       desktopThemeParent.insertBefore(themeToggle, navToggleForTheme);
@@ -102,7 +102,7 @@
   }
   positionThemeToggle();
   if (window.matchMedia) {
-    var navBreakpoint = window.matchMedia('(max-width: 860px)');
+    var navBreakpoint = window.matchMedia('(max-width: 980px)');
     navBreakpoint.addEventListener('change', function () {
       positionThemeToggle();
       if (!navBreakpoint.matches && links && links.classList.contains('open')) closeNav(false);
