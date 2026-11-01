@@ -251,6 +251,34 @@
     revealEls.forEach(function (el) { el.classList.add('visible'); });
   }
 
+  /* Measured-height transitions for the native project questions. */
+  document.querySelectorAll('.question').forEach(function (detail) {
+    var summary = detail.querySelector('summary');
+    var animation = null;
+    var expanded = detail.open;
+    summary.addEventListener('click', function (event) {
+      if (!detail.animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      event.preventDefault();
+      if (!animation) expanded = detail.open;
+      var start = detail.getBoundingClientRect().height;
+      expanded = !expanded;
+      if (animation) animation.cancel();
+      detail.style.height = '';
+      detail.open = true;
+      var end = expanded ? detail.getBoundingClientRect().height : summary.getBoundingClientRect().height + 1;
+      detail.style.overflow = 'hidden';
+      animation = detail.animate([{height: start + 'px'}, {height: end + 'px'}], {
+        duration: 340, easing: 'cubic-bezier(.22,1,.36,1)'
+      });
+      animation.onfinish = function () {
+        detail.open = expanded;
+        detail.style.height = '';
+        detail.style.overflow = '';
+        animation = null;
+      };
+    });
+  });
+
   /* footer year */
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
